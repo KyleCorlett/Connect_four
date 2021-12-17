@@ -2,6 +2,10 @@ require "tty-prompt"
 require "pastel"
 require "tty-font"
 
+require_relative "./main_game.rb"
+require_relative "./rules.rb"
+require_relative "./Difficulty.rb"
+
 prompt = TTY::Prompt.new(active_color: :bright_magenta)
 pastel = Pastel.new
 font = TTY::Font.new(:doom)
