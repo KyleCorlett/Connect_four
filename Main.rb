@@ -4,7 +4,6 @@ require "tty-font"
 
 require_relative "./main_game.rb"
 require_relative "./rules.rb"
-require_relative "./Difficulty.rb"
 
 prompt = TTY::Prompt.new(active_color: :bright_magenta)
 pastel = Pastel.new
@@ -22,28 +21,31 @@ menu = prompt.select("Welcome to connect four", ["Start new game", "Rules", "Dif
 
 case
 
-when menu == "Start new game"
-    print "Whats your name?"
-    name = gets.chomp.capitalize
+    when menu == "Start new game"
+        print "Whats your name? "
+        name = gets.chomp.capitalize
 
-    if name != ""
+        if name != ""
+            system "clear"
+            puts "Welcome #{name}, prepare to battle to the top!"
+            sleep (1)
+            main_game
+            system "clear"
+        elsif name == ""
+            name = "The Great Mysterio"
+            puts "Welcome #{name}, prepare to battle to the top!"
+            sleep (2)
+            main_game
+            system "clear"
+        end 
+
+    when menu == "Rules"
+        rules
+    when menu == "Difficulty"
+        difficulty = prompt.select("Please select your dificulty level:", ["Easy", "Medium", "Hard", "Return to menu"])
         system "clear"
-        puts "Welcome #{name}, prepare to battle to the top!"
-        sleep (1)
-        main_game
-    elsif name == ""
-        name = "Frank"
-        puts "Welcome #{name}, prepare to battle to the top!"
-        sleep (1)
-        main_game
-    end 
-
-when menu == "Rules"
-    rules
-when menu == "Difficulty"
-    select_difficulty
-when menu == "Exit"
-    system "clear"
-    return
-end
+    when menu == "Exit"
+        system "clear"
+        return
+    end
 end
